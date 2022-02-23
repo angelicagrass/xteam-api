@@ -4,7 +4,7 @@ import express, { Application } from 'express'
 import helmet from 'helmet'
 import cors from 'cors'
 import logger from 'morgan'
-import { router } from './routes/router';
+import {router} from './routes/router';
 
 
 
