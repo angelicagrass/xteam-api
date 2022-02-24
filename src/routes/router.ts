@@ -9,5 +9,10 @@ router.get('/validate',extractJWT, controller.validateToken);
 router.post('/register', controller.registerUser);
 router.post('/login', controller.loginUser);
 router.get('/get/all', controller.getAllUsers);
+
+// Child routes
 router.post('/child', childController.newChild);
+router.get('/child/:id', childController.getChildInfo);
+router.post('/child/:id', childController.updateChildInfo);
+router.delete('/child/:id', childController.deleteChild);
 
