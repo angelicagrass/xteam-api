@@ -2,6 +2,7 @@
 
 import { NextFunction, Request, Response } from 'express';
 import Child from '../models/child';
+import fetch from 'node-fetch'
 
 const newChild = (req: Request, res: Response, next: NextFunction) => {
 
@@ -15,18 +16,43 @@ const newChild = (req: Request, res: Response, next: NextFunction) => {
   res.status(201).json({ message: 'Child added successfully', child: child });
 }
 
-const getChildInfo = (req: Request, res: Response, next: NextFunction) => {
+const getChildInfo = async (req: Request, res: Response, next: NextFunction) => {
   //information about child, age etc
-  console.log('here is the child')
+  
+  const child = await Child.findById(req.params.id);
+
+  if (child) {
+    res.status(200).json({ child: child });
+  } else {
+    res.status(404).json({ message: 'Child not found' });
+  }
   
 
 }
 
-const updateChildInfo = (req: Request, res: Response, next: NextFunction) => {
+const updateChildInfo = async (req: Request, res: Response, next: NextFunction) => {
+  const child = await Child.findById(req.params.id);
 
+  if (child) {
+    const { name, birthday } = req.body;
+    child.name = name;
+    child.birthday = birthday;
+    await child.save();
+    res.status(200).json({ message: 'Child updated successfully', child: child });
+  }
+}
+
+const deleteChild = async (req: Request, res: Response, next: NextFunction) => {
+  const child = await Child.findById(req.params.id);
+
+  if (child) {
+    await child.remove();
+    res.status(200).json({ message: 'Child deleted successfully' });
+  } else {
+    res.status(404).json({ message: 'Child not found' });
+  }
 }
 
 
-export default { newChild, getChildInfo, updateChildInfo }
-
+export default { newChild, getChildInfo, updateChildInfo, deleteChild }
 
