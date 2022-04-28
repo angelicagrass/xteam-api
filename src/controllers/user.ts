@@ -91,6 +91,8 @@ const loginUser = (req: Request, res: Response, next: NextFunction) => {
   })
 }
 
+
+
 const getAllUsers = (req: Request, res: Response, next: NextFunction) => {
   //find all users
   

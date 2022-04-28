@@ -15,4 +15,5 @@ router.post('/child', childController.newChild);
 router.get('/child/:id', childController.getChildInfo);
 router.post('/child/:id', childController.updateChildInfo);
 router.delete('/child/:id', childController.deleteChild);
+router.post('/child/:id/user/:userId', childController.addChildToUser);
 
