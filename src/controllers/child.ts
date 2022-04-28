@@ -7,8 +7,6 @@ import fetch from 'node-fetch'
 
 const newChild = (req: Request, res: Response, next: NextFunction) => {
 
-  console.log('add new child')
-  
   // create new child
   // - TODO fix self links
   const { name, birthday } = req.body;
